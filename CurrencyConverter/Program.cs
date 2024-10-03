@@ -45,12 +45,12 @@
                 Console.WriteLine($"{CommandRublesToDolar}) Рубли в долары");
                 Console.WriteLine($"{CommandRublesToEuro}) Рубли в евро");
                 Console.WriteLine($"{CommandExit}) Закрыть программу");
-                string firstInput = Console.ReadLine();
+                string userCommand = Console.ReadLine();
 
-                switch (firstInput)
+                switch (userCommand)
                 {
                     default:
-                        Console.WriteLine($"Комманды \"{firstInput}\" не существует");
+                        Console.WriteLine($"Комманды \"{userCommand}\" не существует");
                         Console.ReadKey();
                         break;
 
