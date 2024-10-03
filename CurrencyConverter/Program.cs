@@ -13,8 +13,8 @@
             const string CommandRublesToDolar = "5";
             const string CommandRublesToEuro = "6";
 
-
             bool isRunning = true;
+            string numberFromUser = string.Empty;
 
             float dolarExchangeRate = 0.00680782f;
             float euroExchangeRate = 0.00616584f;
@@ -46,7 +46,6 @@
                 Console.WriteLine($"{CommandRublesToEuro}) Рубли в евро");
                 Console.WriteLine($"{CommandExit}) Закрыть программу");
                 string firstInput = Console.ReadLine();
-                string numberFromUser = string.Empty;
 
                 switch (firstInput)
                 {
