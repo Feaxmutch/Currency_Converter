@@ -49,8 +49,9 @@
                     Console.Clear();
 
                     Console.Write("Ведите число: ");
+                    string numberFromUser = Console.ReadLine();
 
-                    if (int.TryParse(Console.ReadLine(), out numberForConvert))
+                    if (int.TryParse(numberFromUser, out numberForConvert))
                     {
                         float firstCurrencyCount = 0;
 
@@ -106,11 +107,15 @@
                     }
                     else
                     {
+                        Console.WriteLine($"\"{numberFromUser}\" не является числом");
+                        Console.ReadKey();
                         continue;
                     }
                 }
                 else
                 {
+                    Console.WriteLine($"Комманды \"{firstCurrency}\" не существует");
+                    Console.ReadKey();
                     continue;
                 }
 
@@ -145,6 +150,8 @@
                 }
                 else
                 {
+                    Console.WriteLine($"Комманды \"{secondCurrency}\" не существует");
+                    Console.ReadKey();
                     continue;
                 }
             }
