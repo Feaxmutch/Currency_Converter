@@ -41,17 +41,17 @@
                 Console.WriteLine($"{MenuEuro}) Конвертировать евро");
                 Console.WriteLine($"{MenuRuble}) Конвертировать рубли");
                 Console.WriteLine($"{CommandExit}) Закрыть программу");
-                string firstCurrency = Console.ReadLine();
+                string firstInput = Console.ReadLine();
 
-                if (firstCurrency == CommandExit)
+                if (firstInput == CommandExit)
                 {
                     isRunning = false;
                     continue;
                 }
 
-                bool isCorrectMenu = firstCurrency == MenuDolar ||
-                                     firstCurrency == MenuEuro ||
-                                     firstCurrency == MenuRuble;
+                bool isCorrectMenu = firstInput == MenuDolar ||
+                                     firstInput == MenuEuro ||
+                                     firstInput == MenuRuble;
 
                 if (isCorrectMenu)
                 {
@@ -64,7 +64,7 @@
                     {
                         float firstCurrencyCount = 0;
 
-                        switch (firstCurrency)
+                        switch (firstInput)
                         {
                             case MenuDolar:
                                 firstCurrencyCount = userDolars;
@@ -81,7 +81,7 @@
 
                         if (numberForConvert <= firstCurrencyCount)
                         {
-                            switch (firstCurrency)
+                            switch (firstInput)
                             {
                                 case MenuDolar:
                                     userDolars -= numberForConvert;
@@ -98,7 +98,7 @@
 
                             convertBuffer = numberForConvert;
 
-                            switch (firstCurrency)
+                            switch (firstInput)
                             {
                                 case MenuDolar:
                                     convertBuffer /= dolarExchangeRate;
@@ -123,7 +123,7 @@
                 }
                 else
                 {
-                    Console.WriteLine($"Комманды \"{firstCurrency}\" не существует");
+                    Console.WriteLine($"Комманды \"{firstInput}\" не существует");
                     Console.ReadKey();
                     continue;
                 }
@@ -131,15 +131,15 @@
                 Console.WriteLine($"{CommandToDolar}) В доллары");
                 Console.WriteLine($"{CommandToEuro}) В евро");
                 Console.WriteLine($"{CommandToRuble}) В рубли");
-                string secondCurrency = Console.ReadLine();
+                string secondInput = Console.ReadLine();
 
-                isCorrectMenu = secondCurrency == CommandToDolar ||
-                                secondCurrency == CommandToEuro ||
-                                secondCurrency == CommandToRuble;
+                isCorrectMenu = secondInput == CommandToDolar ||
+                                secondInput == CommandToEuro ||
+                                secondInput == CommandToRuble;
 
                 if (isCorrectMenu)
                 {
-                    switch (secondCurrency)
+                    switch (secondInput)
                     {
                         case CommandToDolar:
                             convertBuffer *= dolarExchangeRate;
@@ -159,7 +159,7 @@
                 }
                 else
                 {
-                    Console.WriteLine($"Комманды \"{secondCurrency}\" не существует");
+                    Console.WriteLine($"Комманды \"{secondInput}\" не существует");
                     Console.ReadKey();
                     continue;
                 }
