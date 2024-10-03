@@ -4,15 +4,15 @@
     {
         static void Main(string[] args)
         {
-            const string CommandExit = "4";
+            const string CommandExit = "7";
 
-            const string MenuDolar = "1";
-            const string MenuEuro = "2";
-            const string MenuRuble = "3";
+            const string CommandDolarToEuro = "1";
+            const string CommandDolarToRubles = "2";
+            const string CommandEuroToDolar = "3";
+            const string CommandEuroToRubles = "4";
+            const string CommandRublesToDolar = "5";
+            const string CommandRublesToEuro = "6";
 
-            const string CommandToDolar = "1";
-            const string CommandToEuro = "2";
-            const string CommandToRuble = "3";
 
             bool isRunning = true;
 
@@ -37,131 +37,155 @@
                 Console.WriteLine($"Рубль: {userRubles}");
                 Console.WriteLine();
 
-                Console.WriteLine($"{MenuDolar}) Конвертировать доллары");
-                Console.WriteLine($"{MenuEuro}) Конвертировать евро");
-                Console.WriteLine($"{MenuRuble}) Конвертировать рубли");
+                Console.WriteLine("Конвертировать:");
+                Console.WriteLine($"{CommandDolarToEuro}) Доллары в евро");
+                Console.WriteLine($"{CommandDolarToRubles}) Долары в рубли");
+                Console.WriteLine($"{CommandEuroToDolar}) Евро в доллары");
+                Console.WriteLine($"{CommandEuroToRubles}) Евро в рубли");
+                Console.WriteLine($"{CommandRublesToDolar}) Рубли в долары");
+                Console.WriteLine($"{CommandRublesToEuro}) Рубли в евро");
                 Console.WriteLine($"{CommandExit}) Закрыть программу");
                 string firstInput = Console.ReadLine();
+                string numberFromUser = string.Empty;
 
-                if (firstInput == CommandExit)
+                switch (firstInput)
                 {
-                    isRunning = false;
-                    continue;
-                }
-
-                bool isCorrectMenu = firstInput == MenuDolar ||
-                                     firstInput == MenuEuro ||
-                                     firstInput == MenuRuble;
-
-                if (isCorrectMenu)
-                {
-                    Console.Clear();
-
-                    Console.Write("Ведите число: ");
-                    string numberFromUser = Console.ReadLine();
-
-                    if (int.TryParse(numberFromUser, out numberForConvert))
-                    {
-                        float firstCurrencyCount = 0;
-
-                        switch (firstInput)
-                        {
-                            case MenuDolar:
-                                firstCurrencyCount = userDolars;
-                                break;
-
-                            case MenuEuro:
-                                firstCurrencyCount = userEuros;
-                                break;
-
-                            case MenuRuble:
-                                firstCurrencyCount = userRubles;
-                                break;
-                        }
-
-                        if (numberForConvert <= firstCurrencyCount)
-                        {
-                            switch (firstInput)
-                            {
-                                case MenuDolar:
-                                    userDolars -= numberForConvert;
-                                    break;
-
-                                case MenuEuro:
-                                    userEuros -= numberForConvert;
-                                    break;
-
-                                case MenuRuble:
-                                    userRubles -= numberForConvert;
-                                    break;
-                            }
-
-                            convertBuffer = numberForConvert;
-
-                            switch (firstInput)
-                            {
-                                case MenuDolar:
-                                    convertBuffer /= dolarExchangeRate;
-                                    break;
-
-                                case MenuEuro:
-                                    convertBuffer /= euroExchangeRate;
-                                    break;
-
-                                case MenuRuble:
-                                    convertBuffer /= rubleExchangeRate;
-                                    break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine($"\"{numberFromUser}\" не является числом");
+                    default:
+                        Console.WriteLine($"Комманды \"{firstInput}\" не существует");
                         Console.ReadKey();
-                        continue;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"Комманды \"{firstInput}\" не существует");
-                    Console.ReadKey();
-                    continue;
-                }
+                        break;
 
-                Console.WriteLine($"{CommandToDolar}) В доллары");
-                Console.WriteLine($"{CommandToEuro}) В евро");
-                Console.WriteLine($"{CommandToRuble}) В рубли");
-                string secondInput = Console.ReadLine();
+                    case CommandDolarToEuro:
+                        Console.Write("Ведите число: ");
+                        numberFromUser = Console.ReadLine();
 
-                isCorrectMenu = secondInput == CommandToDolar ||
-                                secondInput == CommandToEuro ||
-                                secondInput == CommandToRuble;
+                        if (int.TryParse(numberFromUser, out numberForConvert))
+                        {
+                            if (numberForConvert <= userDolars)
+                            {
+                                userDolars -= numberForConvert;
+                                convertBuffer = numberForConvert;
+                                convertBuffer /= dolarExchangeRate;
+                                convertBuffer *= euroExchangeRate;
+                                userEuros += convertBuffer;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\"{numberFromUser}\" не является числом");
+                            Console.ReadKey();
+                        }
+                        break;
 
-                if (isCorrectMenu)
-                {
-                    switch (secondInput)
-                    {
-                        case CommandToDolar:
-                            convertBuffer *= dolarExchangeRate;
-                            userDolars += convertBuffer;
-                            break;
+                    case CommandDolarToRubles:
+                        Console.Write("Ведите число: ");
+                        numberFromUser = Console.ReadLine();
 
-                        case CommandToEuro:
-                            convertBuffer *= euroExchangeRate;
-                            userEuros += convertBuffer;
-                            break;
+                        if (int.TryParse(numberFromUser, out numberForConvert))
+                        {
+                            if (numberForConvert <= userDolars)
+                            {
+                                userDolars -= numberForConvert;
+                                convertBuffer = numberForConvert;
+                                convertBuffer /= dolarExchangeRate;
+                                convertBuffer *= rubleExchangeRate;
+                                userRubles += convertBuffer;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\"{numberFromUser}\" не является числом");
+                            Console.ReadKey();
+                        }
+                        break;
 
-                        case CommandToRuble:
-                            convertBuffer *= rubleExchangeRate;
-                            userRubles += convertBuffer;
-                            break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"Комманды \"{secondInput}\" не существует");
-                    Console.ReadKey();
-                    continue;
+                    case CommandEuroToDolar:
+                        Console.Write("Ведите число: ");
+                        numberFromUser = Console.ReadLine();
+
+                        if (int.TryParse(numberFromUser, out numberForConvert))
+                        {
+                            if (numberForConvert <= userDolars)
+                            {
+                                userEuros -= numberForConvert;
+                                convertBuffer = numberForConvert;
+                                convertBuffer /= euroExchangeRate;
+                                convertBuffer *= dolarExchangeRate;
+                                userDolars += convertBuffer;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\"{numberFromUser}\" не является числом");
+                            Console.ReadKey();
+                        }
+                        break;
+
+                    case CommandEuroToRubles:
+                        Console.Write("Ведите число: ");
+                        numberFromUser = Console.ReadLine();
+
+                        if (int.TryParse(numberFromUser, out numberForConvert))
+                        {
+                            if (numberForConvert <= userDolars)
+                            {
+                                userEuros -= numberForConvert;
+                                convertBuffer = numberForConvert;
+                                convertBuffer /= euroExchangeRate;
+                                convertBuffer *= rubleExchangeRate;
+                                userRubles += convertBuffer;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\"{numberFromUser}\" не является числом");
+                            Console.ReadKey();
+                        }
+                        break;
+
+                    case CommandRublesToDolar:
+                        Console.Write("Ведите число: ");
+                        numberFromUser = Console.ReadLine();
+
+                        if (int.TryParse(numberFromUser, out numberForConvert))
+                        {
+                            if (numberForConvert <= userDolars)
+                            {
+                                userRubles -= numberForConvert;
+                                convertBuffer = numberForConvert;
+                                convertBuffer /= rubleExchangeRate;
+                                convertBuffer *= dolarExchangeRate;
+                                userDolars += convertBuffer;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\"{numberFromUser}\" не является числом");
+                            Console.ReadKey();
+                        }
+                        break;
+
+                    case CommandRublesToEuro:
+                        Console.Write("Ведите число: ");
+                        numberFromUser = Console.ReadLine();
+
+                        if (int.TryParse(numberFromUser, out numberForConvert))
+                        {
+                            if (numberForConvert <= userDolars)
+                            {
+                                userRubles -= numberForConvert;
+                                convertBuffer = numberForConvert;
+                                convertBuffer /= rubleExchangeRate;
+                                convertBuffer *= euroExchangeRate;
+                                userEuros += convertBuffer;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\"{numberFromUser}\" не является числом");
+                            Console.ReadKey();
+                        }
+                        break;
                 }
             }
         }
