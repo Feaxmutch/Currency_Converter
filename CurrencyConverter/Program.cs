@@ -47,6 +47,12 @@
                 Console.WriteLine($"{CommandExit}) Закрыть программу");
                 string userCommand = Console.ReadLine();
 
+                if (userCommand == CommandExit)
+                {
+                    isRunning = false;
+                    continue;
+                }
+
                 switch (userCommand)
                 {
                     default:
