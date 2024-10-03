@@ -4,6 +4,8 @@
     {
         static void Main(string[] args)
         {
+            const string CommandExit = "4";
+
             const string MenuDolar = "1";
             const string MenuEuro = "2";
             const string MenuRuble = "3";
@@ -38,7 +40,14 @@
                 Console.WriteLine($"{MenuDolar}) Конвертировать доллары");
                 Console.WriteLine($"{MenuEuro}) Конвертировать евро");
                 Console.WriteLine($"{MenuRuble}) Конвертировать рубли");
+                Console.WriteLine($"{CommandExit}) Закрыть программу");
                 string firstCurrency = Console.ReadLine();
+
+                if (firstCurrency == CommandExit)
+                {
+                    isRunning = false;
+                    continue;
+                }
 
                 bool isCorrectMenu = firstCurrency == MenuDolar ||
                                      firstCurrency == MenuEuro ||
