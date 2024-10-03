@@ -2,8 +2,6 @@
 {
     internal class Program
     {
-        // Сначала деление, потом умножение
-
         static void Main(string[] args)
         {
             const string MenuDolar = "1";
